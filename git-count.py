@@ -72,7 +72,7 @@ def count_cmd(author=None, range='', paths=None, period='weekly', first='monday'
         if not number: number = 12
     elif period.startswith('y'):
         until = date(today.year+1, 1, 1)
-        if not number: number = 3
+        if not number: number = 5
 
     options['author']    = author
     options['all']       = not no_all

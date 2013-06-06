@@ -120,6 +120,7 @@ def main():
         print >> sys.stderr, 'It works better with Clime (>= 0.1.5). Visit http://clime.mosky.tw/ for more details.'
 
     if clime:
+
         if clime.__version__ < '0.2.3':
             try:
                 # Python >= 2.6
@@ -130,6 +131,7 @@ def main():
                 clime.Program({'count': count}, doc=cleandoc(count.__doc__)).main()
         else:
             clime.start({'count': count})
+
     else:
 
         import sys

@@ -64,5 +64,23 @@ def count_cmd(author=None, period='weekly', number=6, no_all=False, merges=False
         number -= 1
 
 if __name__ == '__main__':
-    import clime
-    clime.start(white_pattern=clime.CMD_SUFFIX)
+
+    clime = None
+
+    try:
+        import clime
+    except ImportError:
+        pass
+
+    if clime and clime.__version__ >= '0.2':
+        clime.start(white_pattern=clime.CMD_SUFFIX)
+    else:
+
+        import sys
+
+        print >> sys.stderr, 'It works better with Clime (>= 0.2). Visit http://clime.mosky.tw/ for more details.'
+
+        if len(sys.argv) <= 1:
+            count_cmd()
+        else:
+            count_cmd(sys.argv[1])

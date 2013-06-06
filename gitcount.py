@@ -36,7 +36,7 @@ DAY = timedelta(days=1)
 WEEK = timedelta(weeks=1)
 DATE_FORMAT  = '%Y-%m-%d 00:00:00'
 
-def count_cmd(author=None, period='weekly', first='monday', number=None, range='', paths=None, no_all=False, merges=False, **options):
+def count(author=None, period='weekly', first='monday', number=None, range='', paths=None, no_all=False, merges=False, **options):
     '''It counts the commits in a Git repository.
 
         -a, --author=<str>  Specify an author.
@@ -114,18 +114,27 @@ def main():
     except ImportError:
         pass
 
-    if clime and clime.__version__ >= '0.2':
-        clime.start(white_pattern=clime.CMD_SUFFIX)
+    if not clime or clime.__version__ < '0.1.5':
+        print >> sys.stderr, 'It works better with Clime (>= 0.1.5). Visit http://clime.mosky.tw/ for more details.'
+
+    if clime:
+        if clime.__version__ < '0.2.3':
+            try:
+                from inspect import cleandoc
+            except ImportError:
+                clime.Program({'count': count}, doc=count.__doc__).main()
+            else:
+                clime.Program({'count': count}, doc=cleandoc(count.__doc__)).main()
+        else:
+            clime.start({'count': count})
     else:
 
         import sys
 
-        print >> sys.stderr, 'It works better with Clime (>= 0.2). Visit http://clime.mosky.tw/ for more details.'
-
         if len(sys.argv) <= 1:
-            count_cmd()
+            count()
         else:
-            count_cmd(sys.argv[1])
+            count(sys.argv[1])
 
 if __name__ == '__main__':
     main()

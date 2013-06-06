@@ -25,6 +25,8 @@ DATE_FORMAT  = '%Y/%m/%d'
 
 def count_cmd(author=None, period='weekly', number=6, no_all=False, merges=False, **kargs):
 
+    assert isinstance(period, basestring) and period[0] in 'wmy', "option 'period' should be weekly (w), monthly (m) or yearly (y)"
+
     today = date.today()
 
     if period.startswith('w'):
@@ -38,7 +40,7 @@ def count_cmd(author=None, period='weekly', number=6, no_all=False, merges=False
     elif period.startswith('y'):
         until = date(today.year+1, 1, 1) - DAY
 
-    while number:
+    while number > 0:
 
         if period.startswith('w'):
             since = until - WEEK + DAY

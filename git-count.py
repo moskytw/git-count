@@ -34,13 +34,14 @@ DAY = timedelta(days=1)
 WEEK = timedelta(weeks=1)
 DATE_FORMAT  = '%Y-%m-%d 00:00:00'
 
-def count_cmd(author=None, range='', paths=None, period='weekly', number=None, no_all=False, merges=False, **options):
+def count_cmd(author=None, range='', paths=None, period='weekly', first='monday', number=None, no_all=False, merges=False, **options):
     '''It counts the commits in a Git repository.
 
         -a, --author=<str>  Specify an author.
         -r, --range=<str>   Specify the range, ex. master..dev.
         -p, --paths=<str>   Specify the paths, ex. .gitignore.
         -p, --period=<str>  Specify the period: daily (d), weekly (w), monthly (m) or yearly (y). It is weekly, by default.
+        -f, --first=<str>   Specify the first day of weeks: monday (mon), sunday (sun), saturday (sat). It is monday, by default.
         -n, --number=<int>  How many periods?
         --not-all           Count the commits in current branch only.
         --merges            Include the merge commits.
@@ -57,6 +58,10 @@ def count_cmd(author=None, range='', paths=None, period='weekly', number=None, n
         if not number: number = 14
     elif period.startswith('w'):
         until = today - today.weekday()*DAY + WEEK
+        if first[:3] == 'sun':
+            until -= DAY
+        elif first[:3] == 'sat':
+            until -= 2*DAY
         if not number: number = 8
     elif period.startswith('m'):
         until = date(

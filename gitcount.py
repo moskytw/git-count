@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+__version__ = '0.1'
+
 from pipes import quote
 from subprocess import Popen, PIPE
 from datetime import date, timedelta

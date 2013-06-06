@@ -24,8 +24,18 @@ WEEK = timedelta(weeks=1)
 DATE_FORMAT  = '%Y/%m/%d'
 
 def count_cmd(author=None, period='weekly', number=6, no_all=False, merges=False, **kargs):
+    '''It counts the commits in a Git repository.
 
-    assert isinstance(period, basestring) and period[0] in 'wmy', "option 'period' should be weekly (w), monthly (m) or yearly (y)"
+        -a, --author=<str>  Specify an author.
+        -p, --period=<str>  Specify the period: weekly (w), monthly (m) or yearly (y). It is weekly, by default.
+        -n, --number=<int>  How many periods?
+        --not-all           Count the commits in current branch only.
+        --merges            Include the merge commits.
+
+    The other arguments will be passed to the command ``git log``.
+    '''
+
+    assert period[0] in 'wmy', "option 'period' should be weekly (w), monthly (m) or yearly (y)"
 
     today = date.today()
 

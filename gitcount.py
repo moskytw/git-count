@@ -45,7 +45,7 @@ def count(author=None, period='weekly', first='monday', number=None, range='', p
         -f, --first=<str>   Specify the first day of weeks: monday (mon), sunday (sun), saturday (sat). It is monday, by default.
         -n, --number=<int>  How many periods?
         -r, --range=<str>   Specify the range, ex. master..dev.
-        -p, --paths=<str>   Specify the paths, ex. .gitignore.
+        -t, --paths=<str>   Specify the paths, ex. .gitignore.
         --not-all           Count the commits in current branch only.
         --merges            Include the merge commits.
 

@@ -53,6 +53,7 @@ def count(author=None, period='weekly', first='monday', number=None, range='', p
     '''
 
     assert period[0] in 'dwmy', "option 'period' should be daily (d), weekly (w), monthly (m) or yearly (y)"
+    assert first[:3] in ('mon', 'sun', 'sat'), "option 'first' should be monday (mon), sunday (sun), saturday (sat)"
 
     today = date.today()
 

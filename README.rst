@@ -7,17 +7,19 @@ in days, weeks, months or years.
 Installations
 -------------
 
-It is uploaded to PyPI, thus you can install it by this command:
+It is uploaded to `PyPI <https://pypi.python.org/pypi/git-count>`_, thus you can install it by this command:
 
 ::
 
     # pip install git-count
 
-Or install it from the source code:
+You also can install it from the source code:
 
 ::
 
     # python setup.py install
+
+For newest version, please visit the `GitHub <https://github.com/moskytw/git-count>`_ of git-count.
 
 Usage
 -----
@@ -46,6 +48,8 @@ Usage
 Examples
 --------
 
+Count the commits which is created by mosky.
+
 ::
 
     DESKTOP ~/mosql (dev) $ git-count mosky
@@ -58,6 +62,8 @@ Examples
     2013-04-22  37
     2013-04-15  83
 
+Count the commits created by mosky and in 3 months.
+
 ::
 
     DESKTOP ~/mosql (dev) $ git-count mosky -pm -n3
@@ -65,9 +71,11 @@ Examples
     2013-05-01  225
     2013-04-01  153
 
+Count all of the commits in 3 days and in a given range.
+
 ::
 
-    DESKTOP ~/mosql (dev) $ git-count mosky -r v0.5..dev -pd -n5
+    DESKTOP ~/mosql (dev) $ git-count -r v0.5..dev -pd -n5
     2013-06-06  0
     2013-06-05  5
     2013-06-04  11

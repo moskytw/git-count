@@ -47,7 +47,7 @@ def count_cmd(author=None, period='weekly', number=6, no_all=False, merges=False
         elif period.startswith('y'):
             since = date(until.year, 1, 1)
 
-        print since, count_git_log(
+        print '%s\t%s' % (since, count_git_log(
             oneline   = True,
             author    = author,
             all       = not no_all,

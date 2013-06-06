@@ -122,6 +122,7 @@ def main():
     if clime:
         if clime.__version__ < '0.2.3':
             try:
+                # Python >= 2.6
                 from inspect import cleandoc
             except ImportError:
                 clime.Program({'count': count}, doc=count.__doc__).main()

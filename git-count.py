@@ -34,13 +34,13 @@ DAY = timedelta(days=1)
 WEEK = timedelta(weeks=1)
 DATE_FORMAT  = '%Y/%m/%d'
 
-def count_cmd(author=None, range='', paths=None, period='weekly', number=6, no_all=False, merges=False, **options):
+def count_cmd(author=None, range='', paths=None, period='weekly', number=None, no_all=False, merges=False, **options):
     '''It counts the commits in a Git repository.
 
         -a, --author=<str>  Specify an author.
         -r, --range=<str>   Specify the range, ex. master..dev.
         -p, --paths=<str>   Specify the paths, ex. .gitignore.
-        -p, --period=<str>  Specify the period: weekly (w), monthly (m) or yearly (y). It is weekly, by default.
+        -p, --period=<str>  Specify the period: daily (d), weekly (w), monthly (m) or yearly (y). It is weekly, by default.
         -n, --number=<int>  How many periods?
         --not-all           Count the commits in current branch only.
         --merges            Include the merge commits.
@@ -48,20 +48,26 @@ def count_cmd(author=None, range='', paths=None, period='weekly', number=6, no_a
     The other arguments will be passed to the command ``git log``.
     '''
 
-    assert period[0] in 'wmy', "option 'period' should be weekly (w), monthly (m) or yearly (y)"
+    assert period[0] in 'dwmy', "option 'period' should be daily (d), weekly (w), monthly (m) or yearly (y)"
 
     today = date.today()
 
-    if period.startswith('w'):
+    if period.startswith('d'):
+        until = today
+        if not number: number = 14
+    elif period.startswith('w'):
         until = today - today.isoweekday()*DAY + WEEK
+        if not number: number = 8
     elif period.startswith('m'):
         until = date(
             today.year+(today.month+1 > 12),
             today.month+1 % 12,
             1
         ) - DAY
+        if not number: number = 12
     elif period.startswith('y'):
         until = date(today.year+1, 1, 1) - DAY
+        if not number: number = 3
 
     options['author']    = author
     options['all']       = not no_all
@@ -69,7 +75,9 @@ def count_cmd(author=None, range='', paths=None, period='weekly', number=6, no_a
 
     while number > 0:
 
-        if period.startswith('w'):
+        if period.startswith('d'):
+            since = until - DAY
+        elif period.startswith('w'):
             since = until - WEEK + DAY
         elif period.startswith('m'):
             since = date(until.year, until.month, 1)
@@ -81,7 +89,10 @@ def count_cmd(author=None, range='', paths=None, period='weekly', number=6, no_a
 
         print '%s\t%s' % (since, count_git_log(range, paths, options))
 
-        until = since-DAY
+        if not period.startswith('d'):
+            until = since-DAY
+        else:
+            until = since
 
         number -= 1
 

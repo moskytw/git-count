@@ -47,7 +47,7 @@ def count_cmd(author=None, range='', paths=None, period='weekly', first='monday'
         --not-all           Count the commits in current branch only.
         --merges            Include the merge commits.
 
-    The other arguments will be passed to the command ``git log``.
+    The other arguments will be passed to the command, ``git log``.
     '''
 
     assert period[0] in 'dwmy', "option 'period' should be daily (d), weekly (w), monthly (m) or yearly (y)"

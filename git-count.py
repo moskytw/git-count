@@ -103,7 +103,7 @@ def count_cmd(author=None, period='weekly', first='monday', number=None, range='
 
         number -= 1
 
-if __name__ == '__main__':
+def main():
 
     clime = None
 
@@ -124,3 +124,6 @@ if __name__ == '__main__':
             count_cmd()
         else:
             count_cmd(sys.argv[1])
+
+if __name__ == '__main__':
+    main()

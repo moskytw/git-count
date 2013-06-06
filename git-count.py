@@ -40,7 +40,8 @@ def count_cmd(author=None, range='', paths=None, period='weekly', first='monday'
         -a, --author=<str>  Specify an author.
         -r, --range=<str>   Specify the range, ex. master..dev.
         -p, --paths=<str>   Specify the paths, ex. .gitignore.
-        -p, --period=<str>  Specify the period: daily (d), weekly (w), monthly (m) or yearly (y). It is weekly, by default.
+        -p, --period=<str>  Specify the period: daily (d), weekly (w), monthly
+                            (m) or yearly (y). It is weekly, by default.
         -f, --first=<str>   Specify the first day of weeks: monday (mon), sunday (sun), saturday (sat). It is monday, by default.
         -n, --number=<int>  How many periods?
         --not-all           Count the commits in current branch only.

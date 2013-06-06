@@ -65,5 +65,4 @@ def count_cmd(author=None, period='weekly', number=6, no_all=False, merges=False
 
 if __name__ == '__main__':
     import clime
-    #clime.start(white_pattern=clime.CMD_SUFFIX, debug=True)
     clime.start(white_pattern=clime.CMD_SUFFIX)

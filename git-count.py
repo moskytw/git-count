@@ -23,7 +23,7 @@ DAY = timedelta(days=1)
 WEEK = timedelta(weeks=1)
 DATE_FORMAT  = '%Y/%m/%d'
 
-def count_cmd(period='weekly', number=6):
+def count_cmd(author=None, period='weekly', number=6, no_all=False, merges=False, **kargs):
 
     today = date.today()
 
@@ -48,12 +48,14 @@ def count_cmd(period='weekly', number=6):
             since = date(until.year, 1, 1)
 
         print since, count_git_log(
-            oneline=True,
-            all=True,
-            no_merges=True,
-            since=since.strftime(DATE_FORMAT),
-            until=until.strftime(DATE_FORMAT),
-        )
+            oneline   = True,
+            author    = author,
+            all       = not no_all,
+            no_merges = not merges,
+            since     = since.strftime(DATE_FORMAT),
+            until     = until.strftime(DATE_FORMAT),
+            **kargs
+        ))
 
         until = since-DAY
 

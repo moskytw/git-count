@@ -32,7 +32,7 @@ def count_git_log(range='', paths=None, options=None):
 
 DAY = timedelta(days=1)
 WEEK = timedelta(weeks=1)
-DATE_FORMAT  = '%Y/%m/%d'
+DATE_FORMAT  = '%Y-%m-%d 00:00:00'
 
 def count_cmd(author=None, range='', paths=None, period='weekly', number=None, no_all=False, merges=False, **options):
     '''It counts the commits in a Git repository.
@@ -56,17 +56,17 @@ def count_cmd(author=None, range='', paths=None, period='weekly', number=None, n
         until = today
         if not number: number = 14
     elif period.startswith('w'):
-        until = today - today.isoweekday()*DAY + WEEK
+        until = today - today.weekday()*DAY + WEEK
         if not number: number = 8
     elif period.startswith('m'):
         until = date(
             today.year+(today.month+1 > 12),
             today.month+1 % 12,
             1
-        ) - DAY
+        )
         if not number: number = 12
     elif period.startswith('y'):
-        until = date(today.year+1, 1, 1) - DAY
+        until = date(today.year+1, 1, 1)
         if not number: number = 3
 
     options['author']    = author
@@ -78,21 +78,22 @@ def count_cmd(author=None, range='', paths=None, period='weekly', number=None, n
         if period.startswith('d'):
             since = until - DAY
         elif period.startswith('w'):
-            since = until - WEEK + DAY
+            since = until - WEEK
         elif period.startswith('m'):
-            since = date(until.year, until.month, 1)
+            since = date(
+                until.year-(until.month-1 <= 0),
+                1 + ((12+(until.month-1)-1) % 12),
+                1
+            )
         elif period.startswith('y'):
-            since = date(until.year, 1, 1)
+            since = date(until.year-1, 1, 1)
 
         options['since'] = since.strftime(DATE_FORMAT)
         options['until'] = until.strftime(DATE_FORMAT)
 
         print '%s\t%s' % (since, count_git_log(range, paths, options))
 
-        if not period.startswith('d'):
-            until = since-DAY
-        else:
-            until = since
+        until = since
 
         number -= 1
 

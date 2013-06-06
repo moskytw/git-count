@@ -1,4 +1,6 @@
 *.pyc
-/dist
 /MANIFEST
+/dist
+/build
+/git_count.egg-info/
 /tags

@@ -71,7 +71,7 @@ Count the commits created by mosky and in 3 months.
     2013-05-01  225
     2013-04-01  153
 
-Count all of the commits in 3 days and in a given range.
+Count all of the commits in 5 days and in a given range.
 
 ::
 

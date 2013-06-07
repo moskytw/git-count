@@ -41,9 +41,9 @@ def count(author=None, period='weekly', first='monday', number=None, range='', p
 
         -a, --author=<str>  Specify an author.
         -p, --period=<str>  Specify the period: daily (d), weekly (w), monthly
-                            (m) or yearly (y). It is weekly, by default.
+                            (m) or yearly (y). Default is weekly.
         -f, --first=<str>   Specify the first day of weeks: monday (mon), sunday
-                            (sun), saturday (sat). It is monday, by default.
+                            (sun), saturday (sat). Default is monday.
         -n, --number=<int>  How many periods?
         -r, --range=<str>   Specify the range, ex. master..dev.
         -t, --paths=<str>   Specify the paths, ex. .gitignore.

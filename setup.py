@@ -4,7 +4,7 @@ from gitcount import __version__
 
 setup(
     name    = 'git-count',
-    description = 'It counts commits in days, weeks, months or years.',
+    description = 'It counts commits over days, weeks, months or years.',
     long_description = open('README.rst').read(),
     version = __version__,
     author  = 'Mosky',

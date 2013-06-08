@@ -2,7 +2,7 @@ Git Count
 ---------
 
 It provides a command, ``git-count``, that can count commits in a Git repository
-in days, weeks, months or years.
+over days, weeks, months or years.
 
 Installations
 -------------

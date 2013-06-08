@@ -71,7 +71,7 @@ def count(author=None, period='weekly', first='monday', number=None, range='', p
     elif period.startswith('m'):
         until = date(
             today.year+(today.month+1 > 12),
-            today.month+1 % 12,
+            (today.month+1) % 12,
             1
         )
         if not number: number = 12

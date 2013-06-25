@@ -10,6 +10,7 @@ setup(
     author  = 'Mosky',
     author_email = 'mosky.tw@gmail.com',
     #url = 'http://git-count.mosky.tw/',
+    url = 'https://github.com/moskytw/git-count',
     py_modules = ['gitcount'],
     license = 'MIT',
     classifiers = [

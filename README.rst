@@ -21,30 +21,6 @@ You also can install it from the source code:
 
 For newest version, please visit the `GitHub <https://github.com/moskytw/git-count>`_ of git-count.
 
-Usage
------
-
-::
-
-    DESKTOP ~/mosql (dev) $ git-count --help
-    usage: [-a | --author=<str>] [-p | --period=<str>] [-f | --first=<str>] [-n | --number=<int>] [-r | --range=<str>] [-t | --paths=<str>] [--no-all] [--merges] [--<key>=<value>...]
-       or: count [-a | --author=<str>] [-p | --period=<str>] [-f | --first=<str>] [-n | --number=<int>] [-r | --range=<str>] [-t | --paths=<str>] [--no-all] [--merges] [--<key>=<value>...]
-
-    It counts the commits in a Git repository.
-
-        -a, --author=<str>  Specify an author.
-        -p, --period=<str>  Specify the period: daily (d), weekly (w), monthly
-                            (m) or yearly (y). Default is weekly.
-        -f, --first=<str>   Specify the first day of weeks: monday (mon), sunday
-                            (sun), saturday (sat). Default is monday.
-        -n, --number=<int>  How many periods?
-        -r, --range=<str>   Specify the range, ex. master..dev.
-        -t, --paths=<str>   Specify the paths, ex. .gitignore.
-        --not-all           Count the commits in current branch only.
-        --merges            Include the merge commits.
-
-    The other arguments will be passed to the command, ``git log``.
-
 Examples
 --------
 
@@ -82,7 +58,27 @@ Count all of the commits in 5 days and in a given range.
     2013-06-03  4
     2013-06-02  0
 
+Usage
+-----
 
+::
 
+    DESKTOP ~/mosql (dev) $ git-count --help
+    usage: [-a | --author=<str>] [-p | --period=<str>] [-f | --first=<str>] [-n | --number=<int>] [-r | --range=<str>] [-t | --paths=<str>] [--no-all] [--merges] [--<key>=<value>...]
+       or: count [-a | --author=<str>] [-p | --period=<str>] [-f | --first=<str>] [-n | --number=<int>] [-r | --range=<str>] [-t | --paths=<str>] [--no-all] [--merges] [--<key>=<value>...]
 
+    It counts the commits in a Git repository.
+
+        -a, --author=<str>  Specify an author.
+        -p, --period=<str>  Specify the period: daily (d), weekly (w), monthly
+                            (m) or yearly (y). Default is weekly.
+        -f, --first=<str>   Specify the first day of weeks: monday (mon), sunday
+                            (sun), saturday (sat). Default is monday.
+        -n, --number=<int>  How many periods?
+        -r, --range=<str>   Specify the range, ex. master..dev.
+        -t, --paths=<str>   Specify the paths, ex. .gitignore.
+        --not-all           Count the commits in current branch only.
+        --merges            Include the merge commits.
+
+    The other arguments will be passed to the command, ``git log``.
 

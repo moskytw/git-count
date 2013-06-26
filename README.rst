@@ -24,7 +24,7 @@ For newest version, please visit the `GitHub <https://github.com/moskytw/git-cou
 Examples
 --------
 
-Count the commits which is created by mosky.
+Count the commits which is created by mosky:
 
 ::
 
@@ -38,7 +38,7 @@ Count the commits which is created by mosky.
     2013-04-22  37
     2013-04-15  83
 
-Count the commits created by mosky and in 3 months.
+Count the commits created by mosky and in 3 months:
 
 ::
 
@@ -47,7 +47,7 @@ Count the commits created by mosky and in 3 months.
     2013-05-01  225
     2013-04-01  153
 
-Count all of the commits in 5 days and in a given range.
+Count all of the commits in 5 days and in a given range:
 
 ::
 

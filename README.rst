@@ -4,7 +4,7 @@ Git Count
 It provides a command, ``git-count``, that can count commits in a Git repository
 in each day, week, month or year.
 
-Installations
+Installation
 -------------
 
 It is uploaded to `PyPI <https://pypi.python.org/pypi/git-count>`_, thus you can install it by this command:

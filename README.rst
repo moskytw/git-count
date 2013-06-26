@@ -1,5 +1,5 @@
 Git Count
----------
+=========
 
 It provides a command, ``git-count``, that can count commits in a Git repository
 in each day, week, month or year.

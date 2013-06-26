@@ -109,33 +109,16 @@ def count(author=None, period='weekly', first='monday', number=None, range='', p
 
 def main():
 
-    clime = None
-
     try:
         import clime
     except ImportError:
-        pass
+        clime = None
 
-    if not clime or clime.__version__ < '0.1.5':
-        print >> sys.stderr, 'It works better with Clime (>= 0.1.5). Visit http://clime.mosky.tw/ for more details.'
-
-    if clime:
-
-        if clime.__version__ < '0.2.3':
-            try:
-                # Python >= 2.6
-                from inspect import cleandoc
-            except ImportError:
-                clime.Program({'count': count}, doc=count.__doc__).main()
-            else:
-                clime.Program({'count': count}, doc=cleandoc(count.__doc__)).main()
-        else:
-            clime.start({'count': count})
-
+    if clime and clime.__version__ >= '0.2':
+        clime.start({'count': count})
     else:
-
         import sys
-
+        print >> sys.stderr, 'It works better with Clime (>= 0.2). Visit http://clime.mosky.tw/ for more details.'
         if len(sys.argv) <= 1:
             count()
         else:

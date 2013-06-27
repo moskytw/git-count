@@ -28,6 +28,6 @@ setup(
              'git-count = gitcount:main',
         ]
     },
-    install_requires = ['clime>=0.1.5'],
+    install_requires = ['clime>=0.2'],
 )
 

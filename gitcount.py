@@ -59,7 +59,7 @@ def count(author=None, period='weekly', first='monday', number=None, range='', p
     today = date.today()
 
     if period.startswith('d'):
-        until = today
+        until = today+DAY
         if not number: number = 14
     elif period.startswith('w'):
         until = today - today.weekday()*DAY + WEEK

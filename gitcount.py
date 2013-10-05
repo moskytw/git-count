@@ -7,6 +7,11 @@ from pipes import quote
 from subprocess import Popen, PIPE
 from datetime import date, timedelta
 
+def check_git_resp():
+    p = Popen("git branch", shell=True, stdout=PIPE, stderr=PIPE)
+    p.wait()
+    return p.returncode == 0
+
 def shell(cmd):
     p = Popen(cmd, shell=True, stdout=PIPE)
     p.wait()
@@ -53,6 +58,7 @@ def count(author=None, period='weekly', first='monday', number=None, range='', p
     The other arguments will be passed to the command, ``git log``.
     '''
 
+    assert check_git_resp(), 'git repository error'
     assert period[0] in 'dwmy', "option 'period' should be daily (d), weekly (w), monthly (m) or yearly (y)"
     assert first[:3] in ('mon', 'sun', 'sat'), "option 'first' should be monday (mon), sunday (sun), saturday (sat)"
 

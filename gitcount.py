@@ -7,11 +7,6 @@ from pipes import quote
 from subprocess import Popen, PIPE
 from datetime import date, timedelta
 
-def shell(cmd):
-    p = Popen(cmd, shell=True, stdout=PIPE)
-    p.wait()
-    return p.stdout.read()[:-1]
-
 def count_git_log(range='', paths=None, options=None):
 
     if options is None:
@@ -30,7 +25,11 @@ def count_git_log(range='', paths=None, options=None):
     if paths:
         shell_args.append('-- %s' % paths)
 
-    return int(shell('git log %s %s | wc -l' % (range, ' '.join(shell_args))))
+    popen = Popen('git log %s %s' % (range, ' '.join(shell_args)), shell=True, stdout=PIPE)
+    if popen.wait():
+        return None
+    else:
+        return popen.stdout.read().count('\n')
 
 DAY = timedelta(days=1)
 WEEK = timedelta(weeks=1)
@@ -101,7 +100,11 @@ def count(author=None, period='weekly', first='monday', number=None, range='', p
         options['since'] = since.strftime(DATE_FORMAT)
         options['until'] = until.strftime(DATE_FORMAT)
 
-        print '%s\t%s' % (since, count_git_log(range, paths, options))
+        count = count_git_log(range, paths, options)
+        if count is not None:
+            print '%s\t%s' % (since, count)
+        else:
+            return
 
         until = since
 

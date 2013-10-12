@@ -9,10 +9,10 @@ setup(
 
     name = 'git-count',
     version = gitcount.__version__,
-    description = 'It counts commits in each day, week, month or year.',
+    description = 'Count your commits.',
     long_description = open('README.rst').read(),
 
-    author  = 'Mosky',
+    author = 'Mosky',
     url = 'https://github.com/moskytw/git-count',
     author_email = 'mosky.tw@gmail.com',
     license = 'MIT',

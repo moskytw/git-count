@@ -35,7 +35,7 @@ DAY = timedelta(days=1)
 WEEK = timedelta(weeks=1)
 DATE_FORMAT = '%Y-%m-%d 00:00:00'
 
-def count(author=None, period='weekly', first='monday', number=None, range='', paths=None, no_all=False, merges=False, **options):
+def count(author=None, period='weekly', first='monday', number=None, range='', paths=None, not_all=False, merges=False, **options):
     '''It counts the commits in a Git repository.
 
         -a, --author=<str>  Specify an author.
@@ -79,7 +79,7 @@ def count(author=None, period='weekly', first='monday', number=None, range='', p
         if not number: number = 5
 
     options['author']    = author
-    options['all']       = not no_all
+    options['all']       = not not_all
     options['no_merges'] = not merges
 
     while number > 0:

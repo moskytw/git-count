@@ -1,18 +1,22 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from setuptools import setup
 
-from gitcount import __version__
+import gitcount
 
 setup(
-    name    = 'git-count',
+
+    name = 'git-count',
+    version = gitcount.__version__,
     description = 'It counts commits in each day, week, month or year.',
     long_description = open('README.rst').read(),
-    version = __version__,
+
     author  = 'Mosky',
-    author_email = 'mosky.tw@gmail.com',
-    #url = 'http://git-count.mosky.tw/',
     url = 'https://github.com/moskytw/git-count',
-    py_modules = ['gitcount'],
+    author_email = 'mosky.tw@gmail.com',
     license = 'MIT',
+    platforms = 'any',
     classifiers = [
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
@@ -23,11 +27,16 @@ setup(
         'Topic :: Utilities',
         'Topic :: Software Development',
     ],
+
+
+    install_requires = ['clime>=0.2'],
+    py_modules = ['gitcount'],
+
     entry_points = {
          'console_scripts': [
              'git-count = gitcount:main',
         ]
-    },
-    install_requires = ['clime>=0.2'],
+    }
+
 )
 

@@ -33,7 +33,7 @@ def count_git_log(range='', paths=None, options=None):
 
 DAY = timedelta(days=1)
 WEEK = timedelta(weeks=1)
-DATE_FORMAT  = '%Y-%m-%d 00:00:00'
+DATE_FORMAT = '%Y-%m-%d 00:00:00'
 
 def count(author=None, period='weekly', first='monday', number=None, range='', paths=None, no_all=False, merges=False, **options):
     '''It counts the commits in a Git repository.

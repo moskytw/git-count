@@ -28,7 +28,7 @@ Count the commits which is created by mosky:
 
 ::
 
-    DESKTOP ~/mosql (dev) $ git count mosky
+    DESKTOP ~/mosql (dev) $ git count -a mosky
     2013-06-03  20
     2013-05-27  108
     2013-05-20  117
@@ -42,7 +42,7 @@ Count the commits created by mosky and in 3 months:
 
 ::
 
-    DESKTOP ~/mosql (dev) $ git count mosky -pm -n3
+    DESKTOP ~/mosql (dev) $ git count -a mosky -pm -n3
     2013-06-01  23
     2013-05-01  225
     2013-04-01  153

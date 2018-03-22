@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 
 __version__ = '0.1.3'
 
@@ -7,16 +8,15 @@ from pipes import quote
 from subprocess import Popen, PIPE
 from datetime import date, timedelta
 
-def count_git_log(range='', paths=None, options=None):
 
+def count_git_log(range='', paths=None, options=None):
     if options is None:
         options = {}
 
     options['oneline'] = True
-
     shell_args = []
 
-    for k, v in options.items():
+    for k, v in list(options.items()):
         if isinstance(v, bool) and v:
             shell_args.append('--%s' % k.replace('_', '-'))
         elif v:
@@ -25,15 +25,18 @@ def count_git_log(range='', paths=None, options=None):
     if paths:
         shell_args.append('-- %s' % paths)
 
-    popen = Popen('git log %s %s' % (range, ' '.join(shell_args)), shell=True, stdout=PIPE)
+    popen = Popen('git log %s %s' %
+                  (range, ' '.join(shell_args)), shell=True, stdout=PIPE)
     if popen.wait():
         return None
     else:
         return popen.stdout.read().count('\n')
 
+
 DAY = timedelta(days=1)
 WEEK = timedelta(weeks=1)
 DATE_FORMAT = '%Y-%m-%d 00:00:00'
+
 
 def count(author=None, period='weekly', first='monday', number=None, range='', paths=None, not_all=False, merges=False, **options):
     '''It counts the commits in a Git repository.
@@ -53,37 +56,41 @@ def count(author=None, period='weekly', first='monday', number=None, range='', p
     '''
 
     assert period[0] in 'dwmy', "option 'period' should be daily (d), weekly (w), monthly (m) or yearly (y)"
-    assert first[:3] in ('mon', 'sun', 'sat'), "option 'first' should be monday (mon), sunday (sun), saturday (sat)"
+    assert first[:3] in (
+        'mon', 'sun', 'sat'), "option 'first' should be monday (mon), sunday (sun), saturday (sat)"
 
     today = date.today()
 
     if period.startswith('d'):
         until = today+DAY
-        if not number: number = 14
+        if not number:
+            number = 14
     elif period.startswith('w'):
         until = today - today.weekday()*DAY + WEEK
         if first[:3] == 'sun':
             until -= DAY
         elif first[:3] == 'sat':
             until -= 2*DAY
-        if not number: number = 8
+        if not number:
+            number = 8
     elif period.startswith('m'):
         until = date(
             today.year+(today.month+1 > 12),
             (today.month+1) % 12,
             1
         )
-        if not number: number = 12
+        if not number:
+            number = 12
     elif period.startswith('y'):
         until = date(today.year+1, 1, 1)
-        if not number: number = 5
+        if not number:
+            number = 5
 
-    options['author']    = author
-    options['all']       = not not_all
+    options['author'] = author
+    options['all'] = not not_all
     options['no_merges'] = not merges
 
     while number > 0:
-
         if period.startswith('d'):
             since = until - DAY
         elif period.startswith('w'):
@@ -102,16 +109,15 @@ def count(author=None, period='weekly', first='monday', number=None, range='', p
 
         count = count_git_log(range, paths, options)
         if count is not None:
-            print '%s\t%s' % (since, count)
+            print('%s\t%s' % (since, count))
         else:
             return
 
         until = since
-
         number -= 1
 
-def main():
 
+def main():
     try:
         import clime
     except ImportError:
@@ -121,11 +127,12 @@ def main():
         clime.start({'count': count})
     else:
         import sys
-        print >> sys.stderr, 'It works better with Clime (>= 0.2). Visit http://clime.mosky.tw/ for more details.'
+        print('It works better with Clime (>= 0.2). Visit http://clime.mosky.tw/ for more details.', file=sys.stderr)
         if len(sys.argv) <= 1:
             count()
         else:
             count(sys.argv[1])
+
 
 if __name__ == '__main__':
     main()

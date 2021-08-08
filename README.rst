@@ -7,14 +7,6 @@ in each day, week, month or year.
 Installation
 -------------
 
-It is uploaded to `PyPI <https://pypi.python.org/pypi/git-count>`_, thus you can install it by this command:
-
-::
-
-    # pip install git-count
-
-You also can install it from the source code:
-
 ::
 
     # python setup.py install
